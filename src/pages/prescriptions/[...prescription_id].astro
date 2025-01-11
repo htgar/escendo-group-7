@@ -1,0 +1,48 @@
+---
+import data from "../../data/data.json";
+import Layout from "../../layouts/Layout.astro";
+import QRCode from "../../utils/qrcode";
+
+export function getStaticPaths() {
+    return [{ params: { prescription_id: "1" } }];
+}
+
+const { prescription_id } = Astro.params;
+
+const prescription_int = Number(prescription_id) - 1;
+
+const prescription = data["prescriptions"][prescription_int];
+---
+
+<Layout pageTitle={"Prescription " + prescription["id"]}>
+    <h1 class="font-bold text-4xl m-5">
+        Please place this QR code on the machine scanner to collect your
+        prescription
+    </h1>
+
+    <div
+        id="qr"
+        class="flex justify-center items-center my-10"
+        data-message={JSON.stringify(prescription)}
+    >
+    </div>
+
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"
+        integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"></script>
+
+    <script>
+        // After importing QRCode.js...
+
+        const QRElement = document.getElementById("qr");
+
+        new QRCode(QRElement, {
+            text: QRElement.dataset.message,
+        });
+    </script>
+    <a class="btn btn-success flex justify-center items-center" href="/"
+        >I have successfully collected my drugs</a
+    >
+</Layout>

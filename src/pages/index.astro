@@ -1,11 +1,28 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Hero from "../components/Hero.astro";
+import Layout from "../layouts/Layout.astro";
+
+import data from "../data/data.json";
+
+const name = data["user"]["name"];
+const prescriptions = data["prescriptions"];
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
-<Layout>
-	<Welcome />
+<Layout pageTitle="Home">
+    <h1 class="text-4xl font-bold m-5">Welcome, {name}!</h1>
+    <div class="card bg-accent w-11/12 shadow-xl m-2">
+        <div class="card-body">
+            <h2 class="card-title">
+                You have {prescriptions.length} prescriptions
+            </h2>
+            <div class="card-actions justify-end">
+                <a class="btn btn-base" href="/prescriptions"
+                    >View prescriptions</a
+                >
+            </div>
+        </div>
+    </div>
 </Layout>
