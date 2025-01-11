@@ -4,7 +4,12 @@ import Layout from "../../layouts/Layout.astro";
 import QRCode from "../../utils/qrcode";
 
 export function getStaticPaths() {
-    return [{ params: { prescription_id: "1" } }];
+    return [
+        {
+            params: { prescription_id: "1" },
+        },
+        { params: { prescription_id: "2" } },
+    ];
 }
 
 const { prescription_id } = Astro.params;
@@ -15,7 +20,7 @@ const prescription = data["prescriptions"][prescription_int];
 ---
 
 <Layout pageTitle={"Prescription " + prescription["id"]}>
-    <h1 class="font-bold text-4xl m-5">
+    <h1 class="font-bold text-2xl m-5">
         Please place this QR code on the machine scanner to collect your
         prescription
     </h1>
@@ -40,6 +45,8 @@ const prescription = data["prescriptions"][prescription_int];
 
         new QRCode(QRElement, {
             text: QRElement.dataset.message,
+            width: 128,
+            height: 128,
         });
     </script>
     <a class="btn btn-success flex justify-center items-center" href="/"

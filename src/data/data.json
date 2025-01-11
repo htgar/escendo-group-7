@@ -6,6 +6,11 @@
   "prescriptions": [
     {
       "id": 1,
+      "provider": 2,
+      "drugs": [{ "id": 3, "qty": 20, "dose": "every morning" }]
+    },
+    {
+      "id": 2,
       "provider": 1,
       "drugs": [
         {
@@ -19,11 +24,6 @@
           "dose": "every 2 days at night"
         }
       ]
-    },
-    {
-      "id": 2,
-      "provider": 2,
-      "drugs": [{ "id": 3, "qty": 30, "dose": "every morning" }]
     }
   ]
 }
